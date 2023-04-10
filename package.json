@@ -1,0 +1,22 @@
+{
+  "name": "interifs",
+  "version": "1.0.0",
+  "description": "Uma aplicação para o Projeto Integrador do 4ºAno de informática",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RayKST/PIN-InterIFS.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RayKST/PIN-InterIFS/issues"
+  },
+  "homepage": "https://github.com/RayKST/PIN-InterIFS#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
