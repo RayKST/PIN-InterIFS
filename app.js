@@ -4,6 +4,7 @@ const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const { resolve } = require('path');
+const { exit } = require('process');
 
 
 const db = new sqlite3.Database('sample.db', (err) => {
@@ -23,26 +24,26 @@ app.set('view engine', 'ejs')
 // Route definition
 
 app.get('/', (req, res) => {
-  res.send('Tela principal')
+  res.render('index')
 });
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login', {alert: false})
 });
 
 app.post('/login', (req, res) =>{
   db.all('select * from user', (err, rows) => {
     if (err){
-      return err
+      return console.log(err.message)
     }
     else{
       rows.forEach((row) =>{
         if (row.login == req.body.username && row.password == req.body.password){
           res.redirect('/')
-        } else{
-          res.send('Credenciais incorretas')
         }
       })
+      alert("Credenciais incorretas")
+      //res.render('login', {alert: true})
     };
   })
 })
@@ -64,7 +65,19 @@ app.post('/criar-usuario', (req, res) => {
 })
 
 app.get('/recuperar-senha', (req, res) => {
-  res.send('Tela de recuperar senha');
+  res.render("reset-password")
+});
+
+app.post('/recuperar-senha', (req, res) => {
+  var query = 'UPDATE user SET password = ? WHERE login = ?'
+  db.run(query, [req.body.password, 'admin'], (err) => {
+    if(err) {
+        res.send(err.message)
+        return console.log(err.message); 
+      }
+      res.redirect('/login')
+      console.log("Senha modificada")
+    })
 });
 
 
