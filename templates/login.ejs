@@ -17,10 +17,10 @@
         <input type="password" id="password" name="password" required>
         <input type="submit" value="Login">
       </form>
-      <button>Criar conta</button>
-      <a onclick="href='recuperar-senha'">Esqueceu sua senha?</a>
+      <a href="criar-usuario"><button>Criar conta</button></a>
+      <a href='recuperar-senha'>Esqueceu sua senha?</a>
       <%   if (alert)      { %>
-          <p style=`p{color:red;}`> Credenciais incorretas </p>
+          <p class="alert"> Credenciais incorretas </p>
       <% }    %>
     </div>
   </body>

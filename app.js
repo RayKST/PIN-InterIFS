@@ -42,8 +42,7 @@ app.post('/login', (req, res) =>{
           res.redirect('/')
         }
       })
-      alert("Credenciais incorretas")
-      //res.render('login', {alert: true})
+      res.render('login', {alert: true})
     };
   })
 })
@@ -80,6 +79,31 @@ app.post('/recuperar-senha', (req, res) => {
     })
 });
 
+app.get('/times', (req, res) => {
+  db.all('select * from Time', (err, teams) => {
+    if (err){
+      return console.log(err.message)
+    }
+    else{
+      res.render("teams", {teams})
+    };
+  })
+});
+
+app.get('/criar-time', (req, res) => {
+  res.render("create-team")
+});
+
+app.post('/criar-time', (req, res) => {
+  db.run('INSERT INTO Time(Nome, Descricao, ParticipantesMaximos) VALUES(?, ?, ?)', [req.body.name, req.body.description, req.body.members], (err) => {
+    if(err) {
+        res.send(err.message)
+        return console.log(err.message); 
+      }
+      res.redirect('/times')
+      console.log("Time criado")
+    })
+});
 
 app.listen(3000, () => {    
   console.log('Server rodando na porta 3000 pae');
