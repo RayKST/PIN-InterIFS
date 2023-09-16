@@ -32,9 +32,10 @@ h1 {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
     display: block;
-    width: 100%;
+    width: 97%;
     padding: 10px;
     margin-bottom: 20px;
     border: none;
@@ -57,4 +58,8 @@ button {
 input[type="submit"]:hover,
 button:hover {
     background-color: #4CAF50;
+}
+
+a{
+    text-decoration: none;
 }

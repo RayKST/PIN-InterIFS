@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link rel="stylesheet" href="/teams.css" type="text/css">
     <title>Lista de Times</title>
 </head>
 <body>
     <%- include('partials/sidebar') %>
+    <a href="criar-time" class="time_criar"><button><strong>Criar time</strong></button></a>
     <h1>Times</h1>
-    <button href="/create-team.ejs"><strong>Criar time</strong></button>
-    <ul>
-        <% for (let i = 0; i < teams.length; i++) { %>
-            <li><%= teams[i].Nome %> - <%= teams[i].Descricao %></li>
-        <% } %>
+    <ul class="lista_times">
+        <div class="times">
+            <% for (let i = 0; i < teams.length; i++) { %>
+                <li><%= teams[i].Nome %> - <%= teams[i].Descricao %></li>
+                <button>Ingressar ao time</button>
+            <% } %>
+        </div>
     </ul>
 </body>
 </html>

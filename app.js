@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+const session = require('express-session');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
@@ -15,6 +16,12 @@ const db = new sqlite3.Database('sample.db', (err) => {
 });
 
 const app = express();
+app.use(session({
+  secret: 'sua_chave_secreta',
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', resolve('./templates'))
@@ -24,7 +31,12 @@ app.set('view engine', 'ejs')
 // Route definition
 
 app.get('/', (req, res) => {
-  res.render('index')
+  // if (req.session.logged){
+    res.render('index')
+  // }
+  // else{
+  //   res.send('É necessário fazer login para acessar o sistema!')
+  // }
 });
 
 app.get('/login', (req, res) => {
@@ -32,18 +44,22 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) =>{
-  db.all('select * from user', (err, rows) => {
+  db.all(`select * from user where login = "${req.body.username}"`, (err, users) => {
     if (err){
-      return console.log(err.message)
+      console.log(err.message)
     }
     else{
-      rows.forEach((row) =>{
-        if (row.login == req.body.username && row.password == req.body.password){
-          res.redirect('/')
+      users.forEach((user) =>{
+        console.log(user)
+        if (user.password == req.body.password){
+          req.session.logged = true;
+          req.session.user = user;
+          console.log(req.session)
+          // return res.redirect('/')
         }
       })
-      res.render('login', {alert: true})
-    };
+        //res.render('login', {alert: true})
+    }
   })
 })
 
@@ -69,7 +85,7 @@ app.get('/recuperar-senha', (req, res) => {
 
 app.post('/recuperar-senha', (req, res) => {
   var query = 'UPDATE user SET password = ? WHERE login = ?'
-  db.run(query, [req.body.password, 'admin'], (err) => {
+  db.run(query, [req.body.password, req.body.username], (err) => {
     if(err) {
         res.send(err.message)
         return console.log(err.message); 
@@ -80,18 +96,29 @@ app.post('/recuperar-senha', (req, res) => {
 });
 
 app.get('/times', (req, res) => {
-  db.all('select * from Time', (err, teams) => {
-    if (err){
-      return console.log(err.message)
-    }
-    else{
-      res.render("teams", {teams})
-    };
-  })
-});
+  // if (req.session.logged){
+    db.all('select * from Time', (err, teams) => {
+      if (err){
+        return console.log(err.message)
+      }
+      else{
+        res.render("teams", {teams})
+      };
+    })
+  }
+  // else{
+  //   res.send('É necessário fazer login para acessar o sistema!')
+  // }
+  //}
+);
 
 app.get('/criar-time', (req, res) => {
-  res.render("create-team")
+  // if (req.session.logged){
+    res.render("create-team")
+  // }
+  // else{
+  //   res.send('É necessário fazer login para acessar o sistema!')
+  // }
 });
 
 app.post('/criar-time', (req, res) => {
