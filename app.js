@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const { resolve } = require('path');
 const { exit } = require('process');
+const e = require('express');
 
 
 const db = new sqlite3.Database('sample.db', (err) => {
@@ -31,12 +32,12 @@ app.set('view engine', 'ejs')
 // Route definition
 
 app.get('/', (req, res) => {
-  // if (req.session.logged){
+  if (req.session.logged){
     res.render('index')
-  // }
-  // else{
-  //   res.send('É necessário fazer login para acessar o sistema!')
-  // }
+  }
+  else{
+     res.send('É necessário fazer login para acessar o sistema!')
+  }
 });
 
 app.get('/login', (req, res) => {
@@ -50,12 +51,11 @@ app.post('/login', (req, res) =>{
     }
     else{
       users.forEach((user) =>{
-        console.log(user)
         if (user.password == req.body.password){
           req.session.logged = true;
           req.session.user = user;
           console.log(req.session)
-          // return res.redirect('/')
+          return res.redirect('/')
         }
       })
         //res.render('login', {alert: true})
@@ -96,7 +96,7 @@ app.post('/recuperar-senha', (req, res) => {
 });
 
 app.get('/times', (req, res) => {
-  // if (req.session.logged){
+  if (req.session.logged){
     db.all('select * from Time', (err, teams) => {
       if (err){
         return console.log(err.message)
@@ -106,19 +106,18 @@ app.get('/times', (req, res) => {
       };
     })
   }
-  // else{
-  //   res.send('É necessário fazer login para acessar o sistema!')
-  // }
-  //}
-);
+  else{
+     res.send('É necessário fazer login para acessar o sistema!')
+  }
+});
 
 app.get('/criar-time', (req, res) => {
-  // if (req.session.logged){
+  if (req.session.logged){
     res.render("create-team")
-  // }
-  // else{
-  //   res.send('É necessário fazer login para acessar o sistema!')
-  // }
+  }
+  else{
+     res.send('É necessário fazer login para acessar o sistema!')
+  }
 });
 
 app.post('/criar-time', (req, res) => {
@@ -129,6 +128,28 @@ app.post('/criar-time', (req, res) => {
       }
       res.redirect('/times')
       console.log("Time criado")
+    })
+});
+
+app.get('/perfil', (req, res) => {
+  if (req.session.logged){
+    const user = req.session.user
+    res.render("profile", {user})
+  }
+  else{
+     res.send('É necessário fazer login para acessar o sistema!')
+  }
+});
+
+app.post('/perfil', (req, res) => {
+  var query = 'UPDATE user SET login = ?, password = ? WHERE login = ?'
+  db.run(query, [req.body.name, req.body.password, req.session.user.login], (err) => {
+    if(err) {
+        res.send(err.message)
+        return console.log(err.message); 
+      }
+      res.redirect('/')
+      console.log("Usuário modificado")
     })
 });
 
