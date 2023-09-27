@@ -1,3 +1,7 @@
+html{
+    overflow-x: hidden;
+}
+
 body{
     font-family: Arial, sans-serif;
     display: flex;
@@ -8,4 +12,21 @@ body{
 h1 {
     color: #39A741;
     text-align: center;
+}
+
+
+.background-icon {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfCucrXuYCIOpgm8TKOHt0eOBjD8QaQH2XIA&usqp=CAU');
+
+    height: 100%;
+    width: 202px;
+    transform: rotate(0deg);
+    opacity: 0.4;
+    position: absolute;
+    /* background-repeat-x: no-repeat; */
+    /* background-position-x: right; */
+    /* margin-top: 500px; */
+    margin-left: 797px;
+    /* background-repeat-y: repeat; */
+
 }

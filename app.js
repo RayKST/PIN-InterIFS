@@ -6,13 +6,13 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const { resolve } = require('path');
 const { exit } = require('process');
-const e = require('express');
+// const sequelize = require('./src/database/index')
 
 
 const db = new sqlite3.Database('sample.db', (err) => {
-	if(err) {
-		return console.log(err.message);
-	}
+  if(err) {
+    return console.log(err.message);
+ 	}
 	console.log("Connected to database!")
 });
 
@@ -28,6 +28,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', resolve('./templates'))
 app.set('view engine', 'ejs')
 
+
+// sequelize.authenticate().then(() => {
+//   console.log('Connection has been established successfully.');
+// }).catch((err) => {
+//   console.log('Unable to connect to the database:', err);
+// });
 
 // Route definition
 
