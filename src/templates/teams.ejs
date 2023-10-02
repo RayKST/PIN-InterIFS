@@ -14,7 +14,7 @@
     <ul class="lista_times">
         <div class="times">
             <% for (let i = 0; i < teams.length; i++) { %>
-                <li><%= teams[i].Nome %> - <%= teams[i].Descricao %></li>
+                <li><%= teams[i].dataValues.name%> - <%= teams[i].dataValues.description %></li>
                 <button>Ingressar ao time</button>
             <% } %>
         </div>
