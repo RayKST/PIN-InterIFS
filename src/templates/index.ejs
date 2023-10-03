@@ -10,9 +10,15 @@
     </head>
 <body>
   <%- include('partials/sidebar') %>
+  <a href="criar-torneio" class="torneio_criar"><button><strong>Criar torneio</strong></button></a>
   <div class="content">
     <h1>Torneios disponíveis </h1>
-    <h2> Em Desenvolvimento </h2>
+    <% if(tornaments){ %>
+      <% for (let i = 0; i < tornaments.length; i++) { %>
+        <li><%= tornaments[i].dataValues.name%> - <%= tornaments[i].dataValues.description %></li>
+        <button value=<%= tornaments[i].dataValues.id %>>Participar do torneio</button>
+      <% } %>
+    <% } %>
   </div>
 
   <div class="background-icon">

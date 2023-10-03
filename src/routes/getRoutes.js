@@ -1,14 +1,16 @@
 const express = require("express");
 const Team = require("../models/Team")
+const Tornaments = require("../models/Tornament")
 const Router = express.Router()
 const sequelize = require("../database/index")
 
 Team.init(sequelize)
+Tornaments.init(sequelize)
 
-
-Router.get('/', (req, res) => {
+Router.get('/', async(req, res) => {
     if (req.session.logged){
-      res.render('index')
+      const tornaments = await Tornaments.findAll()
+      res.render('index', {tornaments})
     }
     else{
        res.send('É necessário fazer login para acessar o sistema!')
@@ -28,17 +30,27 @@ Router.get('/recuperar-senha', (req, res) => {
 });
 
 Router.get('/times', async (req, res) => {
-    if (req.session.logged){
+    // if (req.session.logged){
         const teams = await Team.findAll().then()
-        res.render("teams", {teams})
-    }
-    else{
-        res.send('É necessário fazer login para acessar o sistema!')}
+        const userData = req.session.user
+        res.render("teams", {teams: teams, userData: userData})
+    // }
+    // else{
+        // res.send('É necessário fazer login para acessar o sistema!')}
 });
 
 Router.get('/criar-time', (req, res) => {
   if (req.session.logged){
     res.render("create-team")
+  }
+  else{
+     res.send('É necessário fazer login para acessar o sistema!')
+  }
+});
+
+Router.get('/criar-torneio', (req, res) => {
+  if (req.session.logged){
+    res.render("create-tornament")
   }
   else{
      res.send('É necessário fazer login para acessar o sistema!')

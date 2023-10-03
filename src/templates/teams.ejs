@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/teams.css" type="text/css">
+    <script src="/scripts/joinTeamController.js" type="text/javascript"></script>
     <title>Lista de Times</title>
 </head>
+
 <body>
     <%- include('partials/sidebar') %>
     <a href="criar-time" class="time_criar"><button><strong>Criar time</strong></button></a>
@@ -15,7 +17,7 @@
         <div class="times">
             <% for (let i = 0; i < teams.length; i++) { %>
                 <li><%= teams[i].dataValues.name%> - <%= teams[i].dataValues.description %></li>
-                <button>Ingressar ao time</button>
+                <button type="submit" value=<%= teams[i].dataValues.id %>>Ingressar ao time</button>
             <% } %>
         </div>
     </ul>

@@ -1,12 +1,13 @@
 const express = require("express");
 const Team = require("../models/Team");
 const User = require("../models/User")
+const Tornament = require("../models/Tornament")
 const Router = express.Router()
 const sequelize = require("../database/index");
 
 Team.init(sequelize)
 User.init(sequelize)
-
+Tornament.init(sequelize)
 
 Router.post('/login', async(req, res) =>{
     const user = await User.findOne({
@@ -40,6 +41,24 @@ Router.post('/criar-usuario', async(req, res) => {
     }
     res.redirect('/login')
     console.log("Usuário criado: ", user.dataValues)
+    }
+)
+
+Router.post('/criar-torneio', async(req, res) => {
+    const tornament = await Tornament.create({
+        name: req.body.name,
+        description: req.body.description,
+        numberOfTeams: req.body.teams,
+        teamsTornament: req.body.teamsTornament == 'on' ? "1" : "0",
+        startTornament: req.body.beginTornament,
+        endTornament: req.body.endTornament
+    })
+    if(!tornament) {
+        res.send("Credenciais inválidas")
+        return console.log("Credenciais inválidas"); 
+    }
+    res.redirect('/')
+    console.log("Torneio criado: ", tornament.dataValues)
     }
 )
 
