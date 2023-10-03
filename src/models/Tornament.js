@@ -1,22 +1,24 @@
 const { Model, DataTypes } = require('sequelize')
 
-class Team extends Model {
+class Tornament extends Model {
     static init(sequelize){
         super.init({
             name: DataTypes.STRING,
             description: DataTypes.STRING,
-            numberOfMembers: DataTypes.INTEGER,
+            numberOfTeams: DataTypes.INTEGER,
+            teamsTornament: DataTypes.BOOLEAN,
+            startTornament: DataTypes.DATE,
+            endTornament: DataTypes.DATE,
             createdAt: DataTypes.DATE,
             updatedAt: DataTypes.DATE,
-            creatorID: DataTypes.INTEGER,
         },{
             sequelize,
-            tableName: "teams"
+            tableName: "tornament"
         }
         )
     }
 }
 async()=>{
-    await Team.sync()
+    await Tornament.sync()
 }
-module.exports = Team;
+module.exports = Tornament;

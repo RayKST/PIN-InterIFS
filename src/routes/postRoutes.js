@@ -56,6 +56,12 @@ Router.post('/recuperar-senha', async(req, res) => {
       console.log("Senha modificada: ")
 });
 
+Router.post('/times', async(req, res) => {
+    // await update({teamID: teamID}, {where:{
+    //     id: userID // req.session.user.id
+    // }});
+})
+
 Router.post('/criar-time', async(req, res) => {
     const team = await Team.create({
         name: req.body.name, 

@@ -21,6 +21,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.use(express.static(__dirname + '/src'))
 app.use(express.static('./src/static'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', resolve('./src/templates'))

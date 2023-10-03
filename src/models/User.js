@@ -8,6 +8,7 @@ class User extends Model {
             password: DataTypes.STRING,
             createdAt: DataTypes.DATE,
             updatedAt: DataTypes.DATE,
+            teamID: DataTypes.INTEGER,
         },{
             sequelize,
             tableName: "users"
