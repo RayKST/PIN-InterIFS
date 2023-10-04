@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize')
 class TeamSports extends Model {
     static init(sequelize){
         super.init({
-            sportID: DataTypes.UUIDV4,
+            sportID: DataTypes.INTEGER,
             teamID: DataTypes.INTEGER,
             createdAt: DataTypes.DATE,
             updatedAt: DataTypes.DATE,
