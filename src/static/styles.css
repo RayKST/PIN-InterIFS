@@ -35,7 +35,8 @@ input[type="text"],
 input[type="password"],
 input[type="number"],
 input[type="date"],
-input[type="checkbox"] {
+input[type="checkbox"],
+#comboEsportes {
     display: block;
     width: 97%;
     padding: 10px;

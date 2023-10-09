@@ -18,6 +18,14 @@
         <input type="text" id="description" name="description">
         <label for="members">Número de membros:</label>
         <input type="number" id="members" name="members" required>
+        <label for="selectedSport">Esporte:</label>
+        <select id="comboEsportes" name="selectedSport">
+          <% if(sports) {%>
+            <% for (let i = 0; i < sports.length; i++) { %>
+              <option value=<%= sports[i].dataValues.id%>> <%= sports[i].dataValues.name%> </option>
+            <% } %>
+          <% } %>
+        </select>
         <input type="submit" value="Criar Time">
       </form>
       <a href="times"><button>Voltar aos times</button></a>

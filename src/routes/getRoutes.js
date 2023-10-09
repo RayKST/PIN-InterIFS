@@ -1,11 +1,13 @@
 const express = require("express");
 const Team = require("../models/Team")
 const Tornaments = require("../models/Tornament")
+const Sport = require('../models/Sport')
 const Router = express.Router()
 const sequelize = require("../database/index")
 
 Team.init(sequelize)
 Tornaments.init(sequelize)
+Sport.init(sequelize)
 
 Router.get('/', async(req, res) => {
     if (req.session.logged){
@@ -39,9 +41,10 @@ Router.get('/times', async (req, res) => {
         // res.send('É necessário fazer login para acessar o sistema!')}
 });
 
-Router.get('/criar-time', (req, res) => {
+Router.get('/criar-time', async(req, res) => {
   if (req.session.logged){
-    res.render("create-team")
+    const sports = await Sport.findAll()
+    res.render("create-team", {sports})
   }
   else{
      res.send('É necessário fazer login para acessar o sistema!')

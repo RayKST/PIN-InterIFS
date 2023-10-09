@@ -1,13 +1,16 @@
 const express = require("express");
 const Team = require("../models/Team");
-const User = require("../models/User")
-const Tornament = require("../models/Tornament")
-const Router = express.Router()
+const User = require("../models/User");
+const Tornament = require("../models/Tornament");
+const TeamSports = require("../models/TeamSport");
+const Router = express.Router();
 const sequelize = require("../database/index");
+
 
 Team.init(sequelize)
 User.init(sequelize)
 Tornament.init(sequelize)
+TeamSports.init(sequelize)
 
 Router.post('/login', async(req, res) =>{
     const user = await User.findOne({
@@ -82,6 +85,7 @@ Router.post('/times', async(req, res) => {
 })
 
 Router.post('/criar-time', async(req, res) => {
+    console.log(req.body)
     const team = await Team.create({
         name: req.body.name, 
         description: req.body.description, 
@@ -90,9 +94,18 @@ Router.post('/criar-time', async(req, res) => {
     if(!team) {
         res.send("Credenciais inválidas")
         return console.log("Credenciais inválidas"); 
-      }
-      res.redirect('/times')
-      console.log("Time criado")
+    }
+    
+    const teamCreate = await TeamSports.create({
+        sportID: req.body.selectedSport,
+        teamID: team.dataValues.id
+    });
+    if(!teamCreate) {
+        res.send("Credenciais inválidas")
+        return console.log("Credenciais inválidas"); 
+    }
+    res.redirect('/times')
+    console.log("Time criado")
 });
 
 Router.post('/perfil', async(req, res) => {
