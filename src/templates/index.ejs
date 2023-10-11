@@ -15,8 +15,11 @@
     <h1>Torneios disponíveis </h1>
     <% if(tornaments){ %>
       <% for (let i = 0; i < tornaments.length; i++) { %>
-        <li><%= tornaments[i].dataValues.name%> - <%= tornaments[i].dataValues.description %></li>
-        <button value=<%= tornaments[i].dataValues.id %>>Participar do torneio</button>
+        <form action="" method="post">
+          <li><%= tornaments[i].dataValues.name%> - <%= tornaments[i].dataValues.description %></li>
+          <input style="visibility: hidden; display: none;" type="number" name="tournamentID" value=<%= tornaments[i].dataValues.id %>>
+          <button value=<%= tornaments[i].dataValues.id %>>Participar do torneio</button>
+        </form>
       <% } %>
     <% } %>
   </div>

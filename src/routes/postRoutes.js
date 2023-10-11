@@ -3,6 +3,7 @@ const Team = require("../models/Team");
 const User = require("../models/User");
 const Tornament = require("../models/Tornament");
 const TeamSports = require("../models/TeamSport");
+const TournamentBracket = require("../models/TournamentBracket")
 const Router = express.Router();
 const sequelize = require("../database/index");
 
@@ -11,16 +12,20 @@ Team.init(sequelize)
 User.init(sequelize)
 Tornament.init(sequelize)
 TeamSports.init(sequelize)
+TournamentBracket.init(sequelize)
+
 
 Router.post('/', async(req, res) => {
-    const tournamentBracket = await TournamentBracket.update({teamID: req.body.teamID}, {where:{
-        id: req.session.user.id
-    }});
+    const tournamentBracket = await TournamentBracket.create({
+        tournamentID: req.body.tournamentID,
+        teamID: req.session.user.teamID, // to the controll to refresh the session
+    });
     if (!tournamentBracket){
         return console.log("Não foi possível ingressar ao torneio");
     }else{
+        // console.log(await TournamentBracket.findAll());
         console.log("Seu time ingressou ao torneio");
-        return res.redirect("/")
+        return res.redirect("/");
     }
 })
 
