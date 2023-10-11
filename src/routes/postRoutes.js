@@ -12,6 +12,18 @@ User.init(sequelize)
 Tornament.init(sequelize)
 TeamSports.init(sequelize)
 
+Router.post('/', async(req, res) => {
+    const tournamentBracket = await TournamentBracket.update({teamID: req.body.teamID}, {where:{
+        id: req.session.user.id
+    }});
+    if (!tournamentBracket){
+        return console.log("Não foi possível ingressar ao torneio");
+    }else{
+        console.log("Seu time ingressou ao torneio");
+        return res.redirect("/")
+    }
+})
+
 Router.post('/login', async(req, res) =>{
     const user = await User.findOne({
         where:{
@@ -79,9 +91,15 @@ Router.post('/recuperar-senha', async(req, res) => {
 });
 
 Router.post('/times', async(req, res) => {
-    // await update({teamID: teamID}, {where:{
-    //     id: userID // req.session.user.id
-    // }});
+    const user = await User.update({teamID: req.body.teamID}, {where:{
+        id: req.session.user.id
+    }});
+    if (!user){
+        return console.log("Não foi possível ingressar ao time");
+    }else{
+        console.log("Usuário ingressou ao time");
+        return res.redirect("/times")
+    }
 })
 
 Router.post('/criar-time', async(req, res) => {
