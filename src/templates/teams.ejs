@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/teams.css" type="text/css">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link rel="stylesheet" href="/cards.css" type="text/css">
     <title>Lista de Times</title>
 </head>
 
@@ -12,17 +13,18 @@
     <%- include('partials/sidebar') %>
     <a href="criar-time" class="time_criar"><button><strong>Criar time</strong></button></a>
     <h1>Times</h1>
-    <ul class="lista_times">
-        <div class="times">
-            <% for (let i = 0; i < teams.length; i++) { %>
-                <form action="" method="post">
-                    <li><%= teams[i].dataValues.name%> - <%= teams[i].dataValues.description %></li>
-                    <input style="visibility: hidden; display: none;" type="number" name="teamID" value=<%= teams[i].dataValues.id %>>
-                    <button type="submit" value=<%= teams[i].dataValues.id %>>Ingressar ao time</button>
-                </form>
-            <% } %>
-        </div>
+    <div class="cards">
+        <% for (let i = 0; i < teams.length; i++) { %>
+            <form action="" method="post" class="card">
+                <h2><%= teams[i].dataValues.name%> </h2>
+                <p><b>Descrição:</b> <%= teams[i].dataValues.description %></p>
+                <p><b>Número máximo de membros:</b> <%= teams[i].dataValues.numberOfMembers%></p>
+                <!-- <p><b>Criador: </b> <%= teams[i].dataValues.description %></p> -->
+                <input style="visibility: hidden; display: none;" type="number" name="teamID" value=<%= teams[i].dataValues.id %>>
+                <button type="submit" value=<%= teams[i].dataValues.id %>>Ingressar ao time</button>
+            </form>
+        <% } %>
     </ul>
-    <script src="scripts/joinTeamController.js"></script>
+    <!-- <script src="scripts/joinTeamController.js"></script> -->
 </body>
 </html>
