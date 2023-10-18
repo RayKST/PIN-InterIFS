@@ -5,16 +5,20 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #0B620F;
+    background-color: #23812a;
     overflow-x: hidden;
     padding-top: 16px;
     box-shadow: 2px -2px 6px 0px rgba(0, 0, 0, 0.99)
 }
 
 h2, li {
-    padding-left: 10px;
+    color: black;
+    padding: 20px;
 }
 
+li:hover{
+    background-color: #4CAF50;
+}
 ul {
     display: initial;
     list-style: none;
