@@ -5,18 +5,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/index.css" type="text/css">
-        <!-- <link rel="stylesheet" href="/styles.css" type="text/css"> -->
+        <link rel="stylesheet" href="/cards.css" type="text/css">
         <title>Página Inicial</title>
     </head>
 <body>
   <%- include('partials/sidebar') %>
   <a href="criar-torneio" class="torneio_criar"><button><strong>Criar torneio</strong></button></a>
-  <div class="content">
-    <h1>Torneios disponíveis </h1>
+  <h1>Torneios disponíveis </h1>
+  <div class="cards">
     <% if(tornaments){ %>
       <% for (let i = 0; i < tornaments.length; i++) { %>
-        <form action="" method="post">
-          <li><%= tornaments[i].dataValues.name%> - <%= tornaments[i].dataValues.description %></li>
+        <form action="" method="post" class="card">
+          <h2><%= tornaments[i].dataValues.name%> </h2>
+          <p><b>Descrição:</b> <%= tornaments[i].dataValues.description %></p>
+          <p><b>Número de times:</b> <%= tornaments[i].dataValues.numberOfTeams %></p>
+          <p><b>Data de início: </b> <%= tornaments[i].dataValues.startTornament %></p>
+          <p><b>Data do final: </b><%= tornaments[i].dataValues.endTornament %></p>
           <input style="visibility: hidden; display: none;" type="number" name="tournamentID" value=<%= tornaments[i].dataValues.id %>>
           <button value=<%= tornaments[i].dataValues.id %>>Participar do torneio</button>
         </form>
