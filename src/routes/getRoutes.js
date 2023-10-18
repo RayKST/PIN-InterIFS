@@ -4,6 +4,7 @@ const Tornaments = require("../models/Tornament")
 const Sport = require('../models/Sport')
 const Router = express.Router()
 const sequelize = require("../database/index")
+const returnTeamInfoObject = require('../scripts/getTeamInfoObject')
 
 Team.init(sequelize)
 Tornaments.init(sequelize)
@@ -33,9 +34,10 @@ Router.get('/recuperar-senha', (req, res) => {
 
 Router.get('/times', async (req, res) => {
     // if (req.session.logged){
-        const teams = await Team.findAll().then()
+        // const {teamsInfo, teams} = await returnTeamInfoObject().then()
+        const teams = [] 
         const userData = req.session.user
-        res.render("teams", {teams: teams, userData: userData})
+        res.render("teams", {teams: teams, userData: userData, teamsInfo: teamsInfo})
     // }
     // else{
         // res.send('É necessário fazer login para acessar o sistema!')}
