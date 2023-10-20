@@ -14,18 +14,23 @@
     <a href="criar-time" class="time_criar"><button><strong>Criar time</strong></button></a>
     <h1>Times</h1>
     <div class="cards">
-        <% for (let i = 0; i < teams.length; i++) { %>
-            <form action="" method="post" class="card">
-                <h2><%= teams[i].dataValues.name%> </h2>
-                <p><b>Descrição:</b> <%= teams[i].dataValues.description %></p>
-                <p><b>Número máximo de membros:</b> <%= teams[i].dataValues.numberOfMembers%></p>
-                <!-- <p><b>Criador: </b> <%= teams[i].dataValues.description %></p> -->
-                <!-- <p><b>Esporte pae:</b> <%= teamsInfo %></p> -->
-                <input style="visibility: hidden; display: none;" type="number" name="teamID" value=<%= teams[i].dataValues.id %>>
-                <button type="submit" value=<%= teams[i].dataValues.id %>>Ingressar ao time</button>
-            </form>
+        <% if(teams){ %>
+            <% for (let i = 0; i < teams.length; i++) { %>
+
+                <form action="" method="post" class="card">
+                    <h2><%= teams[i].dataValues.name%> </h2>
+                    <p><b>Descrição:</b> <%= teams[i].dataValues.description %></p>
+                    <p><b>Máximo de membros:</b> <%= teams[i].dataValues.numberOfMembers%></p>
+                    <p><b>Número de membros atuais: </b> <%= teamsInfo[i].totalMembers %></p>
+                    <p><b>Modalidade principal:</b> <%= teamsInfo[i].sportName %></p>
+                    <p><b>Criador do time: </b> <%= teamsInfo[i].creatorName %></p>
+
+                    <input style="visibility: hidden; display: none;" type="number" name="teamID" value=<%= teams[i].dataValues.id %>>
+                    <button type="submit" value=<%= teams[i].dataValues.id %>>Ingressar ao time</button>
+                </form>
+
+            <% } %>
         <% } %>
     </ul>
-    <!-- <script src="scripts/joinTeamController.js"></script> -->
 </body>
 </html>

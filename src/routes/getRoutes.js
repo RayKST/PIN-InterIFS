@@ -34,10 +34,8 @@ Router.get('/recuperar-senha', (req, res) => {
 
 Router.get('/times', async (req, res) => {
     // if (req.session.logged){
-        // const {teamsInfo, teams} = await returnTeamInfoObject().then()
-        const teams = [] 
-        const userData = req.session.user
-        res.render("teams", {teams: teams, userData: userData, teamsInfo: teamsInfo})
+        const {teams, Infos} = await returnTeamInfoObject()
+        res.render("teams", {teams: teams, teamsInfo: Infos})
     // }
     // else{
         // res.send('É necessário fazer login para acessar o sistema!')}

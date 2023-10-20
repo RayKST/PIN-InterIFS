@@ -113,6 +113,7 @@ Router.post('/criar-time', async(req, res) => {
         name: req.body.name, 
         description: req.body.description, 
         numberOfMembers: req.body.members,
+        creatorID: req.session.user.id,
     });
     if(!team) {
         res.send("Credenciais inválidas")

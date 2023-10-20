@@ -25,6 +25,10 @@ body{
 a{
     text-decoration: none;
 }
+
+p{
+    padding-bottom: 5px;
+}
 button {
     display: block;
     width: 100%;
