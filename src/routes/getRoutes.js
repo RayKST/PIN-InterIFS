@@ -16,16 +16,16 @@ Router.get('/', async(req, res) => {
       res.render('index', {tornaments})
     }
     else{
-       res.send('É necessário fazer login para acessar o sistema!')
+      res.redirect('/login')
     }
   });
   
 Router.get('/login', (req, res) => {
-    res.render('login', {alert: false})
+    res.render('login', {message:false})
 });
 
 Router.get('/criar-usuario', (req, res) => {
-  res.render('create-account')
+  res.render('create-account', {message:false})
 });
 
 Router.get('/recuperar-senha', (req, res) => {
@@ -38,7 +38,7 @@ Router.get('/times', async (req, res) => {
         res.render("teams", {teams: teams, teamsInfo: Infos})
     // }
     // else{
-        // res.send('É necessário fazer login para acessar o sistema!')}
+        // res.redirect('/login')
 });
 
 Router.get('/criar-time', async(req, res) => {
@@ -47,7 +47,7 @@ Router.get('/criar-time', async(req, res) => {
     res.render("create-team", {sports})
   }
   else{
-     res.send('É necessário fazer login para acessar o sistema!')
+    res.redirect('/login')
   }
 });
 
@@ -56,7 +56,7 @@ Router.get('/criar-torneio', (req, res) => {
     res.render("create-tornament")
   }
   else{
-     res.send('É necessário fazer login para acessar o sistema!')
+    res.redirect('/login')
   }
 });
 
@@ -66,7 +66,7 @@ Router.get('/perfil', (req, res) => {
     res.render("profile", {user})
   }
   else{
-     res.send('É necessário fazer login para acessar o sistema!')
+    res.redirect('/login')
   }
 });
 

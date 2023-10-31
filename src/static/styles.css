@@ -13,10 +13,6 @@ body {
     align-items: center;
 }
 
-.alert {
-    color: red;
-}
-
 .container {
     width: 400px;
     margin: 0 auto;

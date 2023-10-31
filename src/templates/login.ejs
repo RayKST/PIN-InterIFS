@@ -8,7 +8,9 @@
     <title>Login</title>
   </head>
   <body>
-    <!-- <%- include('partials/message-container') %> -->
+    <%   if (message)      { %>
+      <%- include('partials/message-container', {message: message}) %>
+    <%   }  %>
     <div class="container">
       <h1>Login</h1>
       <form action="" method="POST">
@@ -20,9 +22,6 @@
       </form>
       <a href="criar-usuario"><button>Criar conta</button></a>
       <a href='recuperar-senha'>Esqueceu sua senha?</a>
-      <%   if (alert)      { %>
-          <p class="alert"> Credenciais incorretas </p>
-      <% }    %>
     </div>
   </body>
 </html>

@@ -37,11 +37,10 @@ Router.post('/login', async(req, res) =>{
         }
     })
     if (!user){
-        res.render('login', {alert: true});
+        res.render('login', {message: 'Credenciais incorretas.'});
         console.log("Usuário incorreto.");
     }
     else{
-        console.log(user)
         req.session.logged = true;
         req.session.user = user.dataValues;
         res.redirect('/');
@@ -56,8 +55,8 @@ Router.post('/criar-usuario', async(req, res) => {
         password: req.body.password
     })
     if(!user) {
-        res.send("Credenciais inválidas")
-        return console.log("Credenciais inválidas"); 
+        res.render('create-account', {message: 'Credenciais inválidas.'});
+        return console.log("Credenciais inválidas.");
     }
     res.redirect('/login')
     console.log("Usuário criado: ", user.dataValues)
