@@ -2,13 +2,16 @@ const express = require("express");
 const Team = require("../models/Team")
 const Tornaments = require("../models/Tornament")
 const Sport = require('../models/Sport')
+const TournamentBracket = require("../models/TournamentBracket");
 const Router = express.Router()
 const sequelize = require("../database/index")
-const returnTeamInfoObject = require('../scripts/getTeamInfoObject')
+const returnTeamInfoObject = require('../scripts/getTeamInfoObject');
+const tournamentInfoObject = require('../scripts/tournamentInfoObject')
 
 Team.init(sequelize)
 Tornaments.init(sequelize)
 Sport.init(sequelize)
+TournamentBracket.init(sequelize)
 
 Router.get('/', async(req, res) => {
     if (req.session.logged){
@@ -70,4 +73,13 @@ Router.get('/perfil', (req, res) => {
   }
 });
 
+Router.get('/torneio', async(req, res) => {
+  // if (req.session.logged){
+  const tournamentInfoObject = await tournamentInfoObject(req.query.tournamentID)
+  res.send(Data)
+  // }
+  // else{
+  //   res.redirect('/login')
+  // }
+});
 module.exports = Router;
