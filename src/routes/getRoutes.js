@@ -75,8 +75,9 @@ Router.get('/perfil', (req, res) => {
 
 Router.get('/torneio', async(req, res) => {
   // if (req.session.logged){
-  const tournamentInfoObject = await tournamentInfoObject(req.query.tournamentID)
-  res.send(Data)
+
+  const matchData = await tournamentInfoObject(req.query.tournamentID)
+  res.render("tournament", {data: matchData.dataValues})
   // }
   // else{
   //   res.redirect('/login')

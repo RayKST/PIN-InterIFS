@@ -98,6 +98,7 @@ Router.post('/times', async(req, res) => {
     const user = await User.update({teamID: req.body.teamID}, {where:{
         id: req.session.user.id
     }});
+    
     if (!user){
         return console.log("Não foi possível ingressar ao time");
     }else{
