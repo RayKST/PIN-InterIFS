@@ -4,11 +4,11 @@ const Match = require('../models/Match')
 Match.init(sequelize)
 
 async function returnTournamentInfoObject (tournamentID){
-   const match = await Match.findAll({
+  const match = await Match.findAll({
     where:{
       tournamentID: tournamentID
     }
-   })
+  })
   
   return match;
 }

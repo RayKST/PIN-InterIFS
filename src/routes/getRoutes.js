@@ -76,8 +76,19 @@ Router.get('/perfil', (req, res) => {
 Router.get('/torneio', async(req, res) => {
   // if (req.session.logged){
 
-  const matchData = await tournamentInfoObject(req.query.tournamentID)
-  res.render("tournament", {data: matchData.dataValues})
+  const matches = await tournamentInfoObject(req.query.tournamentID)
+  res.render("tournament", {matches: matches})
+  // }
+  // else{
+  //   res.redirect('/login')
+  // }
+});
+
+Router.get('/torneio', async(req, res) => {
+  // if (req.session.logged){
+
+  const matches = await tournamentInfoObject(req.query.tournamentID)
+  res.render("tournament", {matches: matches})
   // }
   // else{
   //   res.redirect('/login')

@@ -5,13 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/index.css" type="text/css">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <link rel="stylesheet" href="/tournament-matches.css" type="text/css">
     <title>Chave de Torneio</title>
 </head>
 
 <body>
     <%- include('partials/sidebar') %>
-    <section class="brackets-section">
-       <p> <%= data %> </p>
-    </section>
+    <div class="brackets-section">
+        <% if(matches){ %>
+            <table>
+            <% for (let i = 0; i < matches.length; i++) { %>
+                <tr>
+                    <td> <%= matches[i].dataValues.teamOne %> <span> <%= matches[i].dataValues.pointsTeamOne %></span></td>
+                    <td> <%= matches[i].dataValues.teamTwo %> <span> <%= matches[i].dataValues.pointsTeamTwo %> </span></td>
+                </tr>
+            <% } %>
+            </table>
+        <% } %>
+    </div>
 </body>
 </html>
