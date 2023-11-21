@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+import { Model, DataTypes } from 'sequelize'
 
 class Team extends Model {
     static init(sequelize){
@@ -19,4 +19,5 @@ class Team extends Model {
 async()=>{
     await Team.sync()
 }
-module.exports = Team;
+
+export default Team;

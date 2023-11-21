@@ -1,12 +1,13 @@
-const express = require("express");
-const Team = require("../models/Team")
-const Tornaments = require("../models/Tornament")
-const Sport = require('../models/Sport')
-const TournamentBracket = require("../models/TournamentBracket");
+import express from "express";
+import Team from "../models/Team.js"
+import Tornaments from "../models/Tornament.js"
+import Sport from '../models/Sport.js'
+import TournamentBracket from "../models/TournamentBracket.js";
 const Router = express.Router()
-const sequelize = require("../database/index")
-const returnTeamInfoObject = require('../scripts/getTeamInfoObject');
-const tournamentInfoObject = require('../scripts/tournamentInfoObject')
+import {sequelize} from "../database/index.js"
+import returnTeamInfoObject from '../scripts/getTeamInfoObject.js';
+import tournamentInfoObject from '../scripts/tournamentInfoObject.js'
+
 
 Team.init(sequelize)
 Tornaments.init(sequelize)
@@ -94,4 +95,22 @@ Router.get('/torneio', async(req, res) => {
   //   res.redirect('/login')
   // }
 });
-module.exports = Router;
+
+Router.get('/torneio-admin', async(req, res) => {
+  // if (req.session.logged){
+
+  // const matches = await tournamentInfoObject(req.query.tournamentID)
+
+  res.render("tournament-admin")
+});
+
+Router.get('/GetTornaments',async(req, res) => {
+  const tournamentArray = await Tornaments.findAll({
+    attributes: ['name', ['startTornament', 'title'], 'start'],
+    raw: true,
+  })
+
+  res.json({data: tournamentArray})
+})
+
+export default Router;

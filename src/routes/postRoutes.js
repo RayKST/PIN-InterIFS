@@ -1,11 +1,11 @@
-const express = require("express");
-const Team = require("../models/Team");
-const User = require("../models/User");
-const Tornament = require("../models/Tornament");
-const TeamSports = require("../models/TeamSport");
-const TournamentBracket = require("../models/TournamentBracket")
+import express from "express";
+import Team from "../models/Team.js";
+import User from "../models/User.js";
+import Tornament from "../models/Tornament.js";
+import TeamSports from "../models/TeamSport.js";
+import TournamentBracket from "../models/TournamentBracket.js"
 const Router = express.Router();
-const sequelize = require("../database/index");
+import {sequelize} from "../database/index.js";
 
 
 Team.init(sequelize)
@@ -145,4 +145,4 @@ Router.post('/perfil', async(req, res) => {
     console.log("Usuário modificado")
 });
 
-module.exports = Router;
+export default Router;

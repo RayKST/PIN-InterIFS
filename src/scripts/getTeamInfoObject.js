@@ -1,7 +1,7 @@
-const TeamSport = require('../models/TeamSport')
-const User = require('../models/User')
-const Sport = require('../models/Sport')
-const Team = require('../models/Team')
+import TeamSport from '../models/TeamSport.js'
+import User from '../models/User.js'
+import Sport from '../models/Sport.js'
+import Team from '../models/Team.js'
 
 async function returnTeamInfoObject() {
     var sportID = 0;
@@ -54,4 +54,4 @@ async function returnTeamInfoObject() {
 
 
 
-module.exports = returnTeamInfoObject;
+export default returnTeamInfoObject;

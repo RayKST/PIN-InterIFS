@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+import { Model, DataTypes } from 'sequelize'
 
 class Tornament extends Model {
     static init(sequelize){
@@ -21,4 +21,6 @@ class Tornament extends Model {
 async()=>{
     await Tornament.sync()
 }
-module.exports = Tornament;
+
+export default Tornament;
+// module.exports = Tornament;

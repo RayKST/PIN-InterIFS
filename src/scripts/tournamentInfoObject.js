@@ -1,5 +1,5 @@
-const sequelize = require('../database');
-const Match = require('../models/Match')
+import {sequelize} from '../database/index.js'
+import Match from '../models/Match.js'
 
 Match.init(sequelize)
 
@@ -13,4 +13,4 @@ async function returnTournamentInfoObject (tournamentID){
   return match;
 }
 
-module.exports = returnTournamentInfoObject;
+export default returnTournamentInfoObject;

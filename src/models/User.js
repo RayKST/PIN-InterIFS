@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+import { Model, DataTypes } from 'sequelize'
 
 class User extends Model {
     static init(sequelize){
@@ -19,4 +19,5 @@ class User extends Model {
 async()=>{
  await User.sync()
 }
-module.exports = User;
+
+export default User;

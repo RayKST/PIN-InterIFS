@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+import { Model, DataTypes } from 'sequelize';
 
 class Match extends Model {
     static init(sequelize){
@@ -22,4 +22,4 @@ class Match extends Model {
 async()=>{
     await Match.sync()
 }
-module.exports = Match;
+export default Match;
