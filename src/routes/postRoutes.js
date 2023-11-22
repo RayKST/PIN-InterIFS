@@ -6,6 +6,7 @@ import TeamSports from "../models/TeamSport.js";
 import TournamentBracket from "../models/TournamentBracket.js"
 const Router = express.Router();
 import {sequelize} from "../database/index.js";
+import setUserSession from "../scripts/setUserSession.js"
 
 
 Team.init(sequelize)
@@ -103,6 +104,8 @@ Router.post('/times', async(req, res) => {
         return console.log("Não foi possível ingressar ao time");
     }else{
         console.log("Usuário ingressou ao time");
+        req.session.user = setUserSession(req.session.user.id);
+        console.log(req.session.user)
         return res.redirect("/times")
     }
 })

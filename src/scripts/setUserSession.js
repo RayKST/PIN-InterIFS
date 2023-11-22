@@ -1,7 +1,16 @@
-const User = require('../models/User')
+import { sequelize } from '../database/index.js';
+import User from '../models/User.js';
 
-async function setUserSession (){
-    return null
-}
+User.init(sequelize);
 
-module.exports = setUserSession(userLogin, userPassword);
+async function setUserSession (userID){
+    const user = await User.findOne({
+        where: {
+            id: userID
+        }
+    })
+
+    return user.dataValues;
+};
+
+export default setUserSession;

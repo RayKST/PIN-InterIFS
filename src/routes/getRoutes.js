@@ -104,12 +104,15 @@ Router.get('/torneio-admin', async(req, res) => {
   res.render("tournament-admin")
 });
 
+Router.get('/calendario', async(req, res) => {
+  res.render("calendar")
+});
+
 Router.get('/GetTornaments',async(req, res) => {
   const tournamentArray = await Tornaments.findAll({
-    attributes: ['name', ['startTornament', 'title'], 'start'],
+    attributes: [['name', 'title'], ['startTornament', 'start']],
     raw: true,
   })
-
   res.json({data: tournamentArray})
 })
 

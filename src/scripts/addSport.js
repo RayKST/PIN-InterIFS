@@ -5,8 +5,8 @@ Sport.init(sequelize)
 
 async function CreateSport(){
     const sport = await Sport.create({
-        name: 'Basquete',
-        description: 'O verdadeiro maior esporte do globo',
+        name: 'Volei',
+        description: 'Quase um esporte legal',
         numberOfPlayers: 5
     });
     if (!sport){
